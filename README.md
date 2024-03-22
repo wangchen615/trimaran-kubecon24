@@ -1,5 +1,5 @@
-# Trimaran KubeCon 2021 & 2024 EU demo
-The repo is adapted from samples in 2021 trimaran demo. In KubeCon 2024 EU, we add the 3rd scheduler plugin demo accordingly.
+# Trimaran KubeCon 2024 EU demo
+The repo has all scripts/yamls/dashboards for Trimaran scheduler demo presented at KubeCon 2024 EU in Paris.
 
 ## Prerequisites
 1. Build the trimaran plugin images from the latest [scheduler-plugin](https://github.com/kubernetes-sigs/scheduler-plugins.git) repo.
@@ -18,11 +18,12 @@ make local-image
 
 3. Push the images to your own repo for testing.
 ```
-docker push quay.io/chenw615/kube-scheduler:latest
-docker push quay.io/chenw615/controller:latest
+docker push quay.io/<user_id>/kube-scheduler:latest
+docker push quay.io/<user_id>/controller:latest
 ```
 
-## TargetLoadPacking Demo
+## All Scheduler Plugin Demo
+For all scheduler plugins, please go to the corresponding folder and follow the following steps.
 1. Make sure you create the namespaces to run the Trimaran scheduler and also the testing pods.
 ```
 kubectl create ns trimaran
@@ -35,9 +36,22 @@ kubectl create ns trimaran-test
 kubectl create -f trimaran-networkpolicy.yaml
 ```
 
-3. Deploy the scheduler that only enables the TargetLoadPacking plugin.
+3. Deploy the scheduler that only enables the different plugins, for example, to deploy a secondary scheduler that enables TargetLoadPacking plugin we can do the following.
 ```
+cd targetloadpacking
 kubectl create -f targetloadpacking.yaml
+```
+
+4. Deploy the background workload on all 3 nodes. Please change the `nodeName` in the corresponding background workload pod Spec to your own cluster's nodes' names. Let the background workload run a while so the usage behavior are caught up by the monitoring stack.
+```
+kubectl create -f worker1-background.yaml
+kubectl create -f worker2-background.yaml
+kubectl create -f worker3-background.yaml
+```
+
+5. Deploy the testing pod and specify the `trimaran-scheduler` as the pod's scheduler.
+```
+kubectl create -f test-pod.yaml
 ```
 
 
