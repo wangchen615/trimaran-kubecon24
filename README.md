@@ -54,5 +54,10 @@ kubectl create -f worker3-background.yaml
 kubectl create -f test-pod.yaml
 ```
 
+## Demo Videos:
+1. [TargetLoadPacking](https://drive.google.com/file/d/1FXdyn7W3WWvrgkBCPVWcP0zCX2peVU44/view?usp=sharing)
+2. [LoadVariationRiskBalancing](https://drive.google.com/file/d/1yb5vCCmwjHOfzIUr1B2G6zmI8VI93ZoR/view?usp=sharing)
+3. [LowRiskOverCommitment](https://drive.google.com/file/d/1cDFLq_OtbmSY0RzVhMo7d_MBknl2glFN/view?usp=sharing)
+
 
 
