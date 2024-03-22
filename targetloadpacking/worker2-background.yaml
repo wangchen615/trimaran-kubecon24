@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker2-background
+  namespace: trimaran-test
+spec:
+  nodeName: 10.242.64.5
+  containers:
+  - name: cpu-stress-container
+    image: progrium/stress
+    args:
+    - "-c"
+    - "1" # Number of workers to spawn for stressing CPU
+    resources:
+      requests:
+        cpu: "1" # Request 1 CPU core
+      limits:
+        cpu: "3" # Limit to 3 CPU cores

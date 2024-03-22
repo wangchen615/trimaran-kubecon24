@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: worker2-background
+    namespace: trimaran-test
+spec:
+  containers:
+  - name: stress-lowvar
+    image: progrium/stress
+    env:
+    - name: CPU_LOAD
+      value: "8"
+    command: [sh, -c]
+    args: ["stress -q -c $(CPU_LOAD)"]
+    resources:
+      requests:
+        cpu: "8"
+      limits:
+        cpu: "16"
+  nodeName: 10.242.64.17
